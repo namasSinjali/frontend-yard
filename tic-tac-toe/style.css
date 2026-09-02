@@ -1,0 +1,192 @@
+*, *::before, *::after{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    display: grid;
+    justify-content: center;
+    align-content: space-evenly;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    font-family:'Courier New', Courier, monospace;
+}
+header{
+    display: grid;
+    grid-template-columns: 1fr 3rem 1fr;
+    justify-items: center;
+    align-items: center;
+}
+header img{
+    width: 2rem;
+    height: 2rem;
+}
+.player{
+    justify-self: flex-start;
+    flex: 100% 1 1;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+.player.x{
+    justify-self: flex-end;
+    flex-flow: row-reverse nowrap;
+}
+body.x .player.x, body.o .player.o{
+    border-bottom: 2px solid black;
+}
+
+.gameboard{
+    justify-self: center;
+    display: grid;
+    grid-template-rows: repeat(3, 100px);
+    grid-template-columns: repeat(3, 100px);
+    width: 308px;
+    height: 308px;
+    justify-content: center;
+    align-content: center;
+    background-color: black;
+    grid-gap: 4px;
+}
+
+.cell{
+    background-color: white;
+    background-size: contain;
+    cursor: pointer;
+}
+.cell.x, .cell.o {
+    cursor: not-allowed;
+}
+.cell::before{
+    display: block;
+    background-size: contain;
+    content: "";
+    width: 100%;
+    height: 100%;
+}
+
+.cell.x::before{
+    background-image: url(./icons/cross.svg);
+}
+.cell.o::before{
+    background-image: url(./icons/circle.svg);
+}
+
+body.x .gameboard .cell:not(.x):not(.o):hover::before{
+    background-image: url(./icons/cross.svg);
+    opacity: .4;
+}
+body.o .gameboard .cell:not(.x):not(.o):hover::before{
+    background-image: url(./icons/circle.svg);
+    opacity: .4;
+}
+.buttons{
+    display: flex;
+    justify-content: space-between;
+}
+#restart-btn, #settings-btn{
+    display: none;
+}
+button, .button{
+    border: none;
+    outline: none;
+    background: black;
+    color: white;
+    font-family:inherit;
+    font-weight: bold;
+    font-size: 1.5rem;
+    padding: .5rem 1rem;
+    border-radius: 1rem;
+    cursor: pointer;
+}
+button:hover, .button:hover{
+    background: white;
+    color: black;
+}
+.screen{
+    display: none;
+    flex-flow:column nowrap;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background-color: #000000cc;
+    color: white;
+    opacity: .9;
+}
+body.message .message-screen, body.settings .settings-screen{
+    display: flex;
+}
+.message-screen h1{
+    color: white;
+    font-size: 5rem;
+    font-weight: bold;
+    margin-bottom: .5em;
+}
+
+.settings-screen{
+    font-size: 1.2rem;
+    justify-content: flex-start;
+}
+.x.human .selector.level, .o.human .selector.level,
+.x.computer .selector.name, .o.computer .selector.name{
+    display: none;
+}
+.settings-screen>div{
+    border: 1px solid #bbb;
+    border-radius: 1rem;
+    padding: 1rem;
+    margin: 1rem;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-evenly;
+    flex: 2rem 0 0;
+    min-width: 26rem;
+}
+.settings-screen h1{
+    margin: -1rem 0 0 -1rem;
+    width: 4rem;
+    height: 4rem;
+}
+.settings-screen h1 svg{
+    width: 100%;
+    height: 100%;
+}
+.settings-screen .selector{
+    display: flex;
+    justify-content: space-between;
+    margin: .25rem 0;
+}
+.settings-screen h2{
+    font-size: 1.3rem;
+    margin-right: 1rem;
+}
+.settings-screen .selector label{
+    margin-left: 1rem;
+    cursor: pointer;
+}
+.settings-screen .selector input[type="text"]{
+    flex: 5rem 1 0;
+    background-color: #ffffff14;
+    color: white;
+    padding: .1rem 0 .1rem 1rem;
+}
+.settings-screen .selector input[type="text"]:hover{
+    background-color: #ffffff33;
+}
+.settings-screen .selector input[type="text"]:focus{
+    background-color: #000000bb;
+}
+input{
+    box-shadow: none;
+    border: none;
+    outline: none;
+    font-family: inherit;
+    font-size: inherit;
+}
